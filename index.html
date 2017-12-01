@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="game">
+    <meta property="og:site_name" content="Nintendo e-shop Database">
+    <meta property="og:url" content="">
+    <meta name="KeyWords" content="nintendo,任天堂,e-shop,switch,nintendo switch,Switch,nintendo eshop"/>
+    <meta name="Description" content=""/>
+    <meta property="og:title" content="Nintendo e-shop Database"/> 
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="">
+
+    <title>E-Shop 價格查詢器</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="alternate" hreflang="en-US" href="http://botwrecipe.gameqb.net/" />
+    <link rel="alternate" hreflang="en-ES" href="http://botwrecipe.gameqb.net/" />
+    <link rel="alternate" hreflang="ja" href="http://botwrecipe.gameqb.net/" />
+    <link rel="alternate" hreflang="zh-Hant" href="http://botwrecipe.gameqb.net/" />
+    <link rel="alternate" hreflang="zh-Hans" href="http://botwrecipe.gameqb.net/" />
+
+
+    <script type="text/javascript">
+    </script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
+    <script language="javascript">
+    </script> 
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+    <script src="https://unpkg.com/masonry-layout@4.2.0/dist/masonry.pkgd.min.js"></script>
+    <script>
+    //處理下拉選單
+    /*
+    var sql_dabase = "https://spreadsheets.google.com/feeds/list/1Nj4CDgWbeIRbv-5SAfQyujYDcXKZFrOfR83MbZ181E0/1/public/";
+    $.getJSON(sql_dabase + "values?alt=json-in-script&callback=?", function(json){  
+      var $cSel = $('select[name="query_list"]');
+      var e = json.feed.entry,
+      l = e.length,
+      html = "",
+      entry, i, no, name_jp, name_ch;
+      //console.log(l);
+      for (i = 0; i < l; i++) {
+        entry = e[i];
+        //console.log(entry.gsx$namejp.$t);
+
+        no = entry.gsx$no.$t;
+        name_jp = entry.gsx$namejp.$t;
+        name_ch = entry.gsx$namech.$t;
+        $cSel.append($("<option></option>")
+               .attr("value",name_jp)
+               .text(name_jp)); 
+        //html += authority + " " + serial + " " + name + " " + sex + " " + register + "<br/>";
+        html += no + name_jp + name_ch + "<br/>";
+      }
+    });*/
+
+    //測試讀取資料庫
+    function sheet_load_data(){
+      $.getJSON("https://spreadsheets.google.com/feeds/list/1Nj4CDgWbeIRbv-5SAfQyujYDcXKZFrOfR83MbZ181E0/1/public/values?alt=json-in-script&callback=?", function(json){  
+      var e = json.feed.entry,
+      l = e.length,
+      html = "",
+      entry, i, no, name_jp, name_ch;
+      console.log(l);
+      for (i = 0; i < l; i++) {
+        entry = e[i];
+        //console.log(entry.gsx$namejp.$t);
+
+        no = entry.gsx$no.$t;
+        name_jp = entry.gsx$namejp.$t;
+        name_ch = entry.gsx$namech.$t;
+        
+        //html += authority + " " + serial + " " + name + " " + sex + " " + register + "<br/>";
+        html += no + name_jp + name_ch + "<br/>";
+      }
+      $("#test").html(html);
+    });}
+
+
+    //查詢公用函式
+    function sql_query(sheetID,gid,sql = null){
+      var sheetID = sheetID; // 試算表代號
+      var gid = gid; // 工作表代號
+      //var sql = encodeURI(sql); // SQL 語法 做URL轉換
+      var callback = "callback"; // 回呼函數名稱
+
+      //送出查詢
+      if(sql == null){
+        $.getScript("https://spreadsheets.google.com/tq?tqx=responseHandler:" + callback + "&key=" + sheetID + "&gid=" + gid);
+      }else{
+        $.getScript("https://spreadsheets.google.com/tq?tqx=responseHandler:" + callback + "&tq=" + sql + "&key=" + sheetID + "&gid=" + gid);
+      }
+      return callback;
+    }
+
+    //
+    function list_load_data(){
+      var sheetID = "1dt6FX7yA_g95dX1-5vQg-_GVpfcM3PPNNs645W1YrE4", // 試算表代號
+      gid = "735367841", // 工作表代號
+      sql = "SELECT A , AN"; // SQL 語法
+      
+      var res = sql_query (sheetID,gid,sql);
+      window[res] = function(json) {
+        var $cSel = $('#query_list');
+        var rowArray = json.table.rows,
+        
+        rowLength = rowArray.length,
+        html = "",
+        i, j, game_name,game_c_name;
+        console.log(rowArray);
+        for (i = 0; i < rowLength; i++) {
+          dataGroup = rowArray[i].c;
+          dataLength = dataGroup.length;
+          for (j = 0; j < dataLength; j++) {
+            if (!dataGroup[j]) {
+              continue;
+            }
+          }
+          game_name = dataGroup[0].v;
+          game_c_name = dataGroup[1].v;
+          $cSel.append($("<option></option>")
+               .attr("value",game_name)
+               .text(game_c_name)); 
+          //html += "<br/>";
+        }
+      }
+    }
+    //測試
+    function game_query(){
+      var $cSel = $('select[name="query_list"]');
+      var select_option_val = $cSel.val();
+      if(select_option_val == 'default') return;//
+
+      var sheetID = "1dt6FX7yA_g95dX1-5vQg-_GVpfcM3PPNNs645W1YrE4", // 試算表代號
+      gid = "735367841", // 工作表代號
+      sql = "SELECT B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI,AJ,AK,AL,AM,AN WHERE A = '" + select_option_val +"'"; // SQL 語法
+      var country = ['AT','AU', 'BE','BG','CA','CH','CY','CZ','DE','DK','EE','ES','FI','FR','GB','GR','HR','HU','IE','IT','JP','LT','LU' ,'LV' ,'MT','MX','NL' ,'NO','NZ', 'PL' ,'PT','RO','RU','SE','SI','SK' ,'US' ,'ZA'];
+      var price = {};
+      var price_name = {};
+
+      var res = sql_query (sheetID,gid,sql);
+      $("#msg").html('');
+      $("#msg").html("<div id='quering'>查詢中...</div>");
+      //console.log(res);
+      window[res] = function(json) {
+        $("#msg").html('');
+        var rowArray = json.table.rows,
+        rowLength = rowArray.length,
+        html = "",
+        i, j;
+        console.log(rowArray);
+        var dataGroup = '';
+        for (i = 0; i < rowLength; i++) {
+          var idt = new Array;
+          dataGroup = rowArray[i].c;
+          dataLength = dataGroup.length;
+          for (j = 0; j < dataLength; j++) {
+            if (!dataGroup[j]) {
+              continue;
+            }
+          }
+      
+          var show_price = '';
+          for(a = 0; a < country.length; a++){
+            console.log(dataGroup.length);
+            //console.log(dataGroup[a]);
+            if(dataGroup[a] === null) {
+              price[country[a]] = '--';
+            }else if(dataGroup[a].v === null){
+              price[country[a]] = '--';
+            }else{
+              
+              price[country[a]] = dataGroup[a].v;
+
+            }
+          }  
+          var sortedPrice=sortProperties(price);
+          for(x = 0; x < sortedPrice.length ; x ++){
+            if(x == 0){
+              show_price += "    <div id='area_box'><font color='blue'>["+sortedPrice[x][0]+"]</font>:<font color='green'> NT$" + sortedPrice[x][1].toFixed(1) + "</font><br></div>";
+            }else if(x == ((sortedPrice.length) - 1)){
+              show_price += "    <div id='area_box'><font color='blue'>["+sortedPrice[x][0]+"]</font>:<font color='red'> NT$" + sortedPrice[x][1].toFixed(1) + "</font><br></div>";
+            }else{
+              show_price += "    <div id='area_box'><font color='blue'>["+sortedPrice[x][0]+"]</font>:<font color='black'> NT$" + sortedPrice[x][1].toFixed(1) + "</font><br></div>";
+            }
+
+          }
+          //console.log(sortedCities);
+                //console.log(price);
+          html += "<div id='game_box'>[遊戲名稱]:" + select_option_val  + "</font>     <br>" +show_price +  "<br/></div>";
+          //html += "<br/>";
+        }
+        $("#show_table").html(html);
+      }
+    }
+
+    //取匯率
+    function getUSDRate(){
+      var sheetID = "1dt6FX7yA_g95dX1-5vQg-_GVpfcM3PPNNs645W1YrE4", // 試算表代號
+      gid = "0", // 工作表代號
+      sql = "SELECT C WHERE A = 'USD'"; // SQL 語法
+      var res = sql_query (sheetID,gid,sql);
+
+      window[res] = function(json) {
+        var rowArray = json.table.rows,
+        rowLength = rowArray.length,
+        html = "",
+        i, j, rate;
+        var dataGroup = '';
+        for (i = 0; i < rowLength; i++) {
+          dataGroup = rowArray[i].c;
+          dataLength = dataGroup.length;
+          for (j = 0; j < dataLength; j++) {
+            if (!dataGroup[j]) {
+              continue;
+            }
+          }
+          rate = dataGroup[0].v;
+          //html += "<br/>";
+          console.log("美金匯率:"+rate);
+        }
+        
+      }
+    }
+
+
+    function httpGet(theUrl)
+    {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+      //xmlHttp.send();
+      console.log(xmlHttp);
+      return xmlHttp.responseText;
+    }
+
+    //網頁開始執行
+    $(function ()  {
+      console.log('start');
+      list_load_data();
+
+      $('select[name="query_list"]').change(function(){
+            game_query();
+          });
+
+    });
+
+    //排序
+    function sortProperties(obj)
+    {
+      // convert object into array
+      var sortable=[];
+      for(var key in obj)
+        if(obj.hasOwnProperty(key))
+          sortable.push([key, obj[key]]); // each item is an array in format [key, value]
+      
+      // sort items by value
+      sortable.sort(function(a, b)
+      {
+        return a[1]-b[1]; // compare numbers
+      });
+      return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
+    }
+    </script>
+
+
+  </head>
+  <body>
+
+  <div id='title'>
+    E-Shop Database
+  </div>
+  
+  <div id="test"></div>
+  <div id="query_select" >
+    <select id="query_list" name="query_list" class="opts" >
+    <option selected value="default">select game</option>
+    </select>
+  <div id="query_select" >
+  <div></div>
+    <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
+    <div  id='msg'></div>
+    <div class='container' id='show_table' style="height: 100%;"></div>
+  <footer>
+  <div id='footer'>Power by: 橫隔膜@<a href="https://www.facebook.com/search/top/?q=%E5%90%B9%E8%91%97%E9%AD%94%E7%AC%9B%E7%9A%84%E6%B5%AE%E5%A3%AB%E5%BE%B7" target="_blank">Gameqb.net</a>
+  </div>
+                                    
+  </body>
+</html>

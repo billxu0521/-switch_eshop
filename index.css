@@ -1,0 +1,216 @@
+@media only screen and (min-width: 769px){
+  #query_list{
+    margin:5px;
+    background: rgba(255,255,255,255.3);
+    color:#000000;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+    font-size:24px;
+    text-align-last:center;
+    display: inline-block;
+  }
+
+  .container{
+    height: 100% !important ;
+    max-width: 90%;
+    display: block;
+    padding: 10px;
+    margin:0 auto;
+    overflow:hidden;
+    width:80%;
+    column-count: 3;
+    column-gap: 1em;
+    text-align:center;
+  }
+  .item {
+    display: inline-block;
+    background-color:#FFFFFF;
+    padding:8px;
+    margin-bottom:4px;
+    border:1px double;
+    opacity:0.9;
+    display: inline-block;
+    border-radius:10px;
+    margin: 5px 5px 5px 0;
+    overflow:hidden;
+    box-shadow:6px 6px 10px #000;
+    width: 90%;
+    text-align:center;
+  }
+  body {
+    background: url("") no-repeat center center fixed;
+    background-color: #FCFCFC;
+    background-position:  center bottom;
+    background-attachment: fixed;   
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    font-size: 16px;
+    font-family:'Microsoft JhengHei';
+    /*min-width: 100%;
+    min-height: 100%;*/
+}
+}
+@media only screen and (min-width: 0px) and (max-width: 769px){
+  #query_list{
+    width: 14em;
+    margin:5px;
+    background: rgba(255,255,255,255.3);
+    color:#000000;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+    font-size:24px;
+    text-align-last:center;
+    display: inline-block;
+  }
+
+  .container{
+    height: 100% !important ;
+    max-width: 90%;
+    display: block;
+    padding: 10px;
+    margin: 5px 5px 5px 0;
+    overflow:hidden;
+    width:90%;
+    column-count: 1;
+    column-gap: 1em;
+    text-align:center;
+  }
+  .item {
+    display: block;
+    background-color:#FFFFFF;
+    padding:8px;
+    margin-bottom:4px;
+    border:1px double;
+    opacity:0.9;
+    border-radius:10px;
+    display: inline-block;
+    box-shadow:6px 6px 10px #000;
+    text-align:center;
+  }
+
+  body {
+    background: url("") ;
+    background-color: #F0F0F0;
+    background-position:  center bottom;
+    background-attachment: fixed;   
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    font-size: 16px;
+    font-family:'Microsoft JhengHei';
+    /*min-width: 100%;
+    min-height: 100%;*/
+}
+}
+.item img{
+  margin:0 auto;
+  display: block;
+  max-width: 100%;
+}
+
+.item .name{
+  font-size: 24px;
+  color: #8bad00 ;
+}
+
+.item .jp_name{
+  font-size: 18px;
+  color: #81C0C0 ;
+}
+
+.item .hp_img{
+  margin:0 auto;
+  display: block;
+}
+
+#quering{
+  font-size: 26px;
+  color:#4F4F4F;
+  text-shadow:1 1 1px rgba(100,100,100,1);
+  text-align:center;
+  margin:0px auto;
+}
+
+#nodata{
+  font-size: 26px;
+  color:#FFFFFF;
+  text-shadow:0 0 10px rgba(100,100,100,1);
+  text-align:center;
+}
+
+#title{
+  background-color:#FF0000;
+  padding:8px;
+  margin-bottom:4px;
+  opacity:1.0;
+  border-radius:10px;
+  text-align:center;
+  color:#FFFFFF;
+  font-size: 20px;
+  text-shadow:1px 1px 6px #000;
+  box-shadow:1px 1px 2px #000;
+}
+
+#lan_select{ 
+  background-color:#fefec0;
+  padding:8px;
+  margin-bottom:4px;
+  border:4px black double;
+  opacity:0.9;
+  text-align:center;
+  color:#705B28;
+}
+#food_hp 
+{
+  color: #CC0000 ;
+  font-size: 20px;
+  text-shadow: 0px 1px #000;
+}
+
+#main{
+  text-align:center;
+}
+
+#idt{
+  color :#5B4B00;
+}
+#jp_idt{
+  color :#984B4B;
+}
+#query_select{
+  text-align:center;
+}
+#area_box{
+  display: inline-block;
+  background-color:#FFFFFF;
+  padding:8px;
+  margin-bottom:4px;
+  border:1px double;
+  opacity:0.9;
+  display: inline-block;
+  border-radius:10px;
+  margin: 5px 5px 5px 0;
+  overflow:hidden;
+  box-shadow:6px 6px 10px #000;
+  width: 90%;
+  text-align:center;
+
+}
+
+footer{
+  display:flex;
+  box-sizing: border-box;
+  color:#4F4F4F;
+  text-shadow:1 1 4px rgba(100,100,100,1);
+  position: bottom;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  width: 100%;
+  border-top: 1px solid white;
+  justify-content:center;
+  align-items:center; 
+}
+
