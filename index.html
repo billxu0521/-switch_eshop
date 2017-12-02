@@ -124,7 +124,7 @@
 
       var sheetID = "1dt6FX7yA_g95dX1-5vQg-_GVpfcM3PPNNs645W1YrE4", // 試算表代號
       gid = "735367841", // 工作表代號
-      sql = "SELECT B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI,AJ,AK,AL,AM,AN WHERE A = '" + select_option_val +"'"; // SQL 語法
+      sql = "SELECT A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI,AJ,AK,AL,AM,AN WHERE A = '" + select_option_val +"'"; // SQL 語法
       var country = ['AT','AU', 'BE','BG','CA','CH','CY','CZ','DE','DK','EE','ES','FI','FR','GB','GR','HR','HU','IE','IT','JP','LT','LU' ,'LV' ,'MT','MX','NL' ,'NO','NZ', 'PL' ,'PT','RO','RU','SE','SI','SK' ,'US' ,'ZA'];
       var price = {};
       var price_name = {};
@@ -141,7 +141,7 @@
         i, j;
         console.log(rowArray);
         var dataGroup = '';
-        for (i = 0; i < rowLength; i++) {
+        for (i = 0 ;i < rowLength; i++) {
           var idt = new Array;
           dataGroup = rowArray[i].c;
           dataLength = dataGroup.length;
@@ -150,12 +150,12 @@
               continue;
             }
           }
-      
+          
           var show_price = '';
           for(a = 0; a < country.length; a++){
             console.log(dataGroup.length);
             //console.log(dataGroup[a]);
-            if(dataGroup[a] === null) {
+            if(dataGroup[a+1] === null) {
               price[country[a]] = '--';
             }else if(dataGroup[a].v === null){
               price[country[a]] = '--';
@@ -179,6 +179,81 @@
           //console.log(sortedCities);
                 //console.log(price);
           html += "<div id='game_box'>[遊戲名稱]:" + select_option_val  + "</font>     <br>" +show_price +  "<br/></div>";
+          //html += "<br/>";
+        }
+        $("#show_table").html(html);
+      }
+    }
+
+
+    //讀取全部資料
+    function eshop_game_query(){
+        
+      var sheetID = "1dt6FX7yA_g95dX1-5vQg-_GVpfcM3PPNNs645W1YrE4", // 試算表代號
+      gid = "735367841", // 工作表代號
+      sql = "SELECT A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI,AJ,AK,AL,AM,AN "; // SQL 語法
+      var country = ['AT','AU', 'BE','BG','CA','CH','CY','CZ','DE','DK','EE','ES','FI','FR','GB','GR','HR','HU','IE','IT','JP','LT','LU' ,'LV' ,'MT','MX','NL' ,'NO','NZ', 'PL' ,'PT','RO','RU','SE','SI','SK' ,'US' ,'ZA'];
+      var price = {};
+      var price_name = {};
+
+      var res = sql_query (sheetID,gid,sql);
+      $("#msg").show();
+      //console.log(res);
+      window[res] = function(json) {
+        $("#msg").hide();
+        var rowArray = json.table.rows,
+        rowLength = rowArray.length,
+        html = "",
+        i, j;
+        console.log(rowArray);
+        var dataGroup = '';
+        for (i = 0; i < rowLength; i++) {
+          var idt = new Array;
+          dataGroup = rowArray[i].c;
+          dataLength = dataGroup.length;
+          for (j = 0; j < dataLength; j++) {
+            if (!dataGroup[j]) {
+              continue;
+            }
+          }
+          var game_name =  dataGroup[0].v;
+          var show_price = '';
+
+          for(a = 0; a < country.length; a++){
+            //console.log(dataGroup.length);
+            
+            if(dataGroup[a+1] === null) {
+              price[country[a]] = 0;
+            }else if(dataGroup[a+1].v === null){
+              price[country[a]] = 0;
+            }else{
+              
+              price[country[a]] = dataGroup[a+1].v;
+
+            }
+          }  
+          
+          var sortedPrice=sortProperties(price);
+          var best_price = 0;
+          for(x = 0; x < sortedPrice.length ; x ++){
+            
+            if(sortedPrice[x][1].toFixed(1) > 0){
+              //console.log(game_name+"//"+sortedPrice[x][1]);
+            best_price = sortedPrice[x][1].toFixed(1); 
+            if(best_price == 0) {
+              show_price = "    <div id='area_box'>---<br></div>";
+            }else{        
+              show_price = "    <div id='area_box'><font color='blue'>["+sortedPrice[x][0]+"]</font>:<font color='green'> NT$" + sortedPrice[x][1].toFixed(1) + "</font><br></div>";
+            }
+              break;
+            }else{
+              show_price = "    <div id='area_box'>---<br></div>";
+            }
+
+          }
+          //console.log(sortedCities);
+                //console.log(price);
+          html += "<div class='game_box' name='"+ game_name+"'>[遊戲名稱]:" + game_name  + "</font>     <br>" +show_price +  "<br/></div>";
           //html += "<br/>";
         }
         $("#show_table").html(html);
@@ -214,21 +289,28 @@
       }
     }
 
+    //篩選器
+    function search_hide(selector){
+      $(selector).on('keyup',function(){
+        console.log($(selector).val());
+        if($(selector).val()==''){ 
+          $(".game_box").show();
+        }else{
+          $(".game_box").hide();
+          $("[name*='" +  $(selector).val() + "']").show();
 
-    function httpGet(theUrl)
-    {
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-      //xmlHttp.send();
-      console.log(xmlHttp);
-      return xmlHttp.responseText;
+          //$("[name*='1']").show();
+        }
+
+      });
     }
+
 
     //網頁開始執行
     $(function ()  {
       console.log('start');
-      list_load_data();
-
+      eshop_game_query();
+      search_hide('#search');
       $('select[name="query_list"]').change(function(){
             game_query();
           });
@@ -261,16 +343,39 @@
     E-Shop Database
   </div>
   
-  <div id="test"></div>
+  
+  <div  id='msg'>
+  <div aria-busy="true" aria-label="Loading" role="progressbar" class="container_1">
+  <div class="swing">
+    <div class="swing-l"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="swing-r"></div>
+  </div>
+  <div class="shadow">
+    <div class="shadow-l"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="shadow-r"></div>
+  </div>
+ </div>
+ </div>
+
   <div id="query_select" >
-    <select id="query_list" name="query_list" class="opts" >
-    <option selected value="default">select game</option>
-    </select>
-  <div id="query_select" >
-  <div></div>
+
+    <input id="search" type="search" placeholder="遊戲名稱">
     <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
-    <div  id='msg'></div>
+    
     <div class='container' id='show_table' style="height: 100%;"></div>
+    
+
+  <hr>
   <footer>
   <div id='footer'>Power by: 橫隔膜@<a href="https://www.facebook.com/search/top/?q=%E5%90%B9%E8%91%97%E9%AD%94%E7%AC%9B%E7%9A%84%E6%B5%AE%E5%A3%AB%E5%BE%B7" target="_blank">Gameqb.net</a>
   </div>
