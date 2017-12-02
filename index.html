@@ -236,14 +236,19 @@
           var sortedPrice=sortProperties(price);
           var best_price = 0;
           for(x = 0; x < sortedPrice.length ; x ++){
-            
+            var high_price = sortedPrice[sortedPrice.length-1][1].toFixed(0);
+           
             if(sortedPrice[x][1].toFixed(1) > 0){
               //console.log(game_name+"//"+sortedPrice[x][1]);
             best_price = sortedPrice[x][1].toFixed(1); 
             if(best_price == 0) {
               show_price = "    <div id='area_box'>---<br></div>";
             }else{        
-              show_price = "    <div id='area_box'><font color='blue'>["+sortedPrice[x][0]+"]</font>:<font color='green'> NT$" + sortedPrice[x][1].toFixed(1) + "</font><br></div>";
+              show_price = "<div id='area_box'><font color='blue'>["+sortedPrice[x][0]+"]</font>:<font color='green'> NT$" + sortedPrice[x][1].toFixed(0) + "</font><br></div>";
+              if(high_price > 0 && sortedPrice[x][0] != sortedPrice[sortedPrice.length-1][0]){
+                show_price += "<div id='area_box'><font color='blue'>["+sortedPrice[sortedPrice.length-1][0]+"]</font>:<font color='red'> NT$" + high_price + "</font><br></div>";
+                show_price +=  "<div id='area_box'><font color='blue'>價差約</font>:<font color='red'> NT$" + (high_price - best_price).toFixed(0) + "</font><br></div>";
+              }
             }
               break;
             }else{
@@ -371,7 +376,10 @@
 
     <input id="search" type="search" placeholder="遊戲名稱">
     <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
-    
+    <div >匯率以<a href="https://eshop-prices.com/" target="_blank">台灣銀行牌告</a>為基準</div>
+    <div>本網頁列舉價格僅為預估值</div>
+    <div style="color:red">請注意地區語言版本</div>
+
     <div class='container' id='show_table' style="height: 100%;"></div>
     
 
