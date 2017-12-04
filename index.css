@@ -103,8 +103,15 @@
     font-family:'Microsoft JhengHei';
     /*min-width: 100%;
     min-height: 100%;*/
+  }
 }
+
+.bannerimage {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
 }
+
 .item img{
   margin:0 auto;
   display: block;
@@ -174,7 +181,7 @@
 #query_select{
   text-align:center;
 }
-#area_box{
+.game_box{
   display: inline-block;
   background-color:#FFFFFF;
   padding:8px;
