@@ -139,9 +139,11 @@
         html = "",
         i, j;
         rowArray = shuffle(rowArray);
-        console.log(rowArray);
+        var game_count = 0;
+        
         var dataGroup = '';
         for (i = 0; i < rowLength; i++) {
+          game_count ++;
           var idt = new Array;
           dataGroup = rowArray[i].c;
           dataLength = dataGroup.length;
@@ -150,6 +152,7 @@
               continue;
             }
           }
+
           var game_name =  dataGroup[0].v;
           var game_cname = dataGroup[39].v;
           var show_price = '';
@@ -199,8 +202,9 @@
           
           //html += "<br/>";
         }
+        $("#game_count").html('目前遊戲數量:'+game_count); 
         $(".container").html(html); 
-
+        
       }
 
     }
@@ -321,7 +325,9 @@
     <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
     <div >匯率以<a href="https://eshop-prices.com/" target="_blank">台灣銀行牌告</a>為基準</div>
     <div>本網頁列舉價格僅供參考</div>
+    <div id='game_count'></div>
     <div style="color:red">!請注意地區語言版本!</div>
+    
 
     <div class='container' id='show_table' style="height: 100%;">
         <div id='msg_1'>
