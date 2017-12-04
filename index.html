@@ -13,7 +13,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image" content="https://3.bp.blogspot.com/-LhFyRujtVSI/WiQgtwNatkI/AAAAAAAAdIs/t9VaKZN3HJ4twuMuF00uakK1JJlwW8r3ACLcBGAs/s1600/NS%2BE-Shop.jpg">
 
-    <title>E-Shop 價格查詢器</title>
+    <title>Switch E-Shop 價格查詢器</title>
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="alternate" hreflang="en-US" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="en-ES" href="http://botwrecipe.gameqb.net/" />
@@ -194,7 +194,7 @@
           
           //console.log(sortedCities);
                 //console.log(price);
-          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name+"'>"+ show_onsale_price + "<a id='c_name'>" + game_cname  + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
+          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toLowerCase()+"_" + game_name + "_"+game_cname+"'>"+ show_onsale_price + "<a id='c_name'>" + game_cname  + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
           
           //html += "<br/>";
         }
@@ -232,8 +232,6 @@
             }
           }
           rate = dataGroup[0].v;
-          //html += "<br/>";
-          console.log("美金匯率:"+rate);
         }
         
       }
@@ -242,12 +240,17 @@
     //篩選器
     function search_hide(selector){
       $(selector).on('keyup',function(){
-        console.log($(selector).val());
+        //console.log($(selector).val());
+        var _str = new RegExp($(selector).val());
         if($(selector).val()==''){ 
           $(".game_box").show();
         }else{
           $(".game_box").hide();
           $("[name*='" +  $(selector).val() + "']").show();
+            //$("div").filter(function() {
+            //console.log(this);
+            //return _str.test($(this).attr('name'));
+          //}).show();
 
           //$("[name*='1']").show();
         }
@@ -284,6 +287,19 @@
       });
       return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
     }
+
+
+    // NEW selector  
+    jQuery.expr[':'].Contains = function(a, i, m){
+     return jQuery(a).text().toUpperCase()
+       .indexOf(m[3].toUpperCase()) >= 0;
+    };  
+     
+    // OVERWRITES old selecor
+    jQuery.expr[':'].contains = function(a, i, m){
+     return jQuery(a).text().toUpperCase()
+       .indexOf(m[3].toUpperCase()) >= 0;
+    };
     </script>
 
 
@@ -292,7 +308,7 @@
 
   <div ></div>
   <div id='title'>
-  Switch e-shop Database
+  Switch E-Shop 價格查詢器
   </div>
   
   
@@ -303,8 +319,8 @@
     <input id="search" type="search" placeholder="遊戲名稱">
     <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
     <div >匯率以<a href="https://eshop-prices.com/" target="_blank">台灣銀行牌告</a>為基準</div>
-    <div>本網頁列舉價格僅為預估值</div>
-    <div style="color:red">請注意地區語言版本</div>
+    <div>本網頁列舉價格僅供參考</div>
+    <div style="color:red">!請注意地區語言版本!</div>
 
     <div class='container' id='show_table' style="height: 100%;">
         <div id='msg_1'>
