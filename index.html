@@ -11,7 +11,7 @@
     <meta property="og:title" content="Nintendo e-shop Database"/> 
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="https://3.bp.blogspot.com/-LhFyRujtVSI/WiQgtwNatkI/AAAAAAAAdIs/t9VaKZN3HJ4twuMuF00uakK1JJlwW8r3ACLcBGAs/s1600/NS%2BE-Shop.jpg">
 
     <title>E-Shop 價格查詢器</title>
     <link rel="stylesheet" type="text/css" href="index.css">
@@ -31,6 +31,7 @@
     </script> 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
     <script src="https://unpkg.com/masonry-layout@4.2.0/dist/masonry.pkgd.min.js"></script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89833109-7"></script>
     <script>
@@ -136,6 +137,7 @@
         rowLength = rowArray.length,
         html = "",
         i, j;
+        rowArray = shuffle(rowArray);
         console.log(rowArray);
         var dataGroup = '';
         for (i = 0; i < rowLength; i++) {
@@ -150,7 +152,7 @@
           var game_name =  dataGroup[0].v;
           var game_cname = dataGroup[39].v;
           var show_price = '';
-
+          var show_onsale_price = '';
           for(a = 0; a < country.length; a++){
             //console.log(dataGroup.length);
             
@@ -172,15 +174,15 @@
            
             if(sortedPrice[x][1].toFixed(1) > 0){
               //console.log(game_name+"//"+sortedPrice[x][1]);
-            best_price = sortedPrice[x][1].toFixed(1); 
+            best_price = sortedPrice[x][1].toFixed(0); 
+
             if(best_price == 0) {
               show_price = "    <div id='area_box'>---<br></div>";
             }else{        
-              show_price = "<div id='area_box'><font color='blue'>["+sortedPrice[x][0]+"]</font>:<font color='green'> NT$" + sortedPrice[x][1].toFixed(0) + "</font><br></div>";
+              show_price = "<div id='lower_box'><a id='lower_contry'>["+sortedPrice[x][0]+"]:</a><a id='lower_price'> NT$" + best_price + "</a><br></div>";
               if(high_price > 0 && sortedPrice[x][0] != sortedPrice[sortedPrice.length-1][0]){
-                show_price += "<div id='area_box'><font color='blue'>["+sortedPrice[sortedPrice.length-1][0]+"]</font>:<font color='red'> NT$" + high_price + "</font><br></div>";
-                show_price +=  "<div id='area_box'><font color='blue'>價差:</font>:<font color='red'> NT$" + 
-                (high_price - best_price).toFixed(0) + "</font><br></div>";
+                show_price += "<div id='higher_box'><a id='higher_contry'>["+sortedPrice[sortedPrice.length-1][0]+"]:</a><a id='higher_price'> NT$" + high_price + "</a><br></div>";
+                show_onsale_price +=  "<div id='onsale_box'>價差高達NT$" + (high_price - best_price).toFixed(0) + "!!<br></div>";
               }
             }
               break;
@@ -189,13 +191,23 @@
             }
 
           }
+          
           //console.log(sortedCities);
                 //console.log(price);
-          html += "<div class='game_box' name='"+ game_name+"'>" + game_name  + "/" + game_cname + "</font> <br>" +show_price +  "<br/></div>";
+          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name+"'>"+ show_onsale_price + "<a id='c_name'>" + game_cname  + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
+          
           //html += "<br/>";
         }
-        $("#show_table").html(html);
+        $(".container").html(html); 
+
       }
+
+    }
+
+    //洗牌
+    function shuffle(arr){
+      for(var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
+      return arr;
     }
 
     //取匯率
@@ -249,6 +261,7 @@
       console.log('start');
       eshop_game_query();
       search_hide('#search');
+      
       $('select[name="query_list"]').change(function(){
             game_query();
           });
@@ -278,35 +291,12 @@
   <body> 
 
   <div ></div>
-  <img class="bannerimage" src="https://3.bp.blogspot.com/-LhFyRujtVSI/WiQgtwNatkI/AAAAAAAAdIs/t9VaKZN3HJ4twuMuF00uakK1JJlwW8r3ACLcBGAs/s1600/NS%2BE-Shop.jpg" class="cover"  />
-
   <div id='title'>
-   
+  Switch e-shop Database
   </div>
   
   
-  <div  id='msg'>
-  <div aria-busy="true" aria-label="Loading" role="progressbar" class="container_1">
-  <div class="swing">
-    <div class="swing-l"></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div class="swing-r"></div>
-  </div>
-  <div class="shadow">
-    <div class="shadow-l"></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div class="shadow-r"></div>
-  </div>
- </div>
- </div>
+
 
   <div id="query_select" >
 
@@ -316,7 +306,13 @@
     <div>本網頁列舉價格僅為預估值</div>
     <div style="color:red">請注意地區語言版本</div>
 
-    <div class='container' id='show_table' style="height: 100%;"></div>
+    <div class='container' id='show_table' style="height: 100%;">
+        <div id='msg_1'>
+          <div id='msg'></div>
+        </div>
+          
+        
+    </div>
     
 
   <hr>
