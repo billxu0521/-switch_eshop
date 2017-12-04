@@ -179,7 +179,7 @@
             if(best_price == 0) {
               show_price = "    <div id='area_box'>---<br></div>";
             }else{        
-              show_price = "<div id='lower_box'><a id='lower_contry'>["+sortedPrice[x][0]+"]:</a><a id='lower_price'> NT$" + best_price + "</a><br></div>";
+              show_price = "<div id='lower_box'><a id='lower_contry'>["+sortedPrice[x][0]+"]:</a><a id='lower_price'> NT$" + best_price + "</a><a id='pricetip'>此為最佳價格</a><br></div>";
               if(high_price > 0 && sortedPrice[x][0] != sortedPrice[sortedPrice.length-1][0]){
                 show_price += "<div id='higher_box'><a id='higher_contry'>["+sortedPrice[sortedPrice.length-1][0]+"]:</a><a id='higher_price'> NT$" + high_price + "</a><br></div>";
                 show_onsale_price +=  "<div id='onsale_box'>價差高達NT$" + (high_price - best_price).toFixed(0) + "!!<br></div>";
