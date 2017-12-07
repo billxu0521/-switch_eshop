@@ -21,7 +21,7 @@
     <link rel="alternate" hreflang="ja" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="zh-Hant" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="zh-Hans" href="http://botwrecipe.gameqb.net/" />
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
     <script type="text/javascript">
     </script>  
@@ -31,6 +31,7 @@
     <script language="javascript">
     </script> 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://unpkg.com/masonry-layout@4.2.0/dist/masonry.pkgd.min.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -126,6 +127,46 @@
       gid = "735367841", // 工作表代號
       sql = "SELECT A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI,AJ,AK,AL,AM,AN "; // SQL 語法
       var country = ['AT','AU', 'BE','BG','CA','CH','CY','CZ','DE','DK','EE','ES','FI','FR','GB','GR','HR','HU','IE','IT','JP','LT','LU' ,'LV' ,'MT','MX','NL' ,'NO','NZ', 'PL' ,'PT','RO','RU','SE','SI','SK' ,'US' ,'ZA'];
+      var c_country = {
+        'AT':'奧地利',
+        'AU':'澳大利亞',
+        'BE':'比利時',
+        'BG':'保加利亞',
+        'CA':'加拿大',
+        'CH':'瑞士',
+        'CY':'賽普勒斯',
+        'CZ':'捷克',
+        'DE':'德國',
+        'DK':'丹麥',
+        'EE':'愛沙尼亞',
+        'ES':'西班牙',
+        'FI':'芬蘭',
+        'FR':'法國',
+        'GB':'英國',
+        'GR':'希臘',
+        'HR':'克羅埃西亞',
+        'HU':'匈牙利',
+        'IE':'愛爾蘭',
+        'IT':'義大利',
+        'JP':'日本',
+        'LT':'立陶宛',
+        'LU':'盧森堡',
+        'LV':'拉脫維亞',
+        'MT':'馬爾他',
+        'MX':'墨西哥',
+        'NL':'荷蘭',
+        'NO':'挪威',
+        'NZ':'紐西蘭',
+        'PL':'波蘭',
+        'PT':'葡萄牙',
+        'RO':'羅馬尼亞',
+        'RU':'俄羅斯',
+        'SE':'瑞典',
+        'SI':'斯洛維尼亞',
+        'SK':'斯洛伐克',
+        'US':'美國',
+        'ZA':'南非'
+      };
       var price = {};
       var price_name = {};
 
@@ -143,7 +184,7 @@
         
         var dataGroup = '';
         for (i = 0; i < rowLength; i++) {
-          game_count ++;
+          
           var idt = new Array;
           dataGroup = rowArray[i].c;
           dataLength = dataGroup.length;
@@ -154,6 +195,9 @@
           }
 
           var game_name =  dataGroup[0].v;
+
+          if(game_name == '--') continue;
+          game_count ++;
           var game_cname = dataGroup[39].v;
           var show_price = '';
           var show_onsale_price = '';
@@ -179,14 +223,15 @@
             if(sortedPrice[x][1].toFixed(1) > 0){
               //console.log(game_name+"//"+sortedPrice[x][1]);
             best_price = sortedPrice[x][1].toFixed(0); 
-
+            var best_area =  sortedPrice[x][0].toLowerCase();
+            var bad_area = sortedPrice[sortedPrice.length-1][0].toLowerCase();
             if(best_price == 0) {
               show_price = "    <div id='area_box'>---<br></div>";
             }else{        
-              show_price = "<div id='lower_box'><a id='lower_contry'>["+sortedPrice[x][0]+"]:</a><a id='lower_price'> NT$" + best_price + "</a><a id='pricetip'>此為最佳價格</a><br></div>";
+              show_price = "<div id='lower_box'><div class='best_circle'><div class='innimg' style='background-image:url(./png250px/"+ best_area +".png)''></div></div><a id='lower_contry'>"+c_country[sortedPrice[x][0]]+":</a><a id='lower_price'> NT$" + best_price + "</a><a id='pricetip'>此地區為最佳價格</a><br></div>";
               if(high_price > 0 && sortedPrice[x][0] != sortedPrice[sortedPrice.length-1][0]){
-                show_price += "<div id='higher_box'><a id='higher_contry'>["+sortedPrice[sortedPrice.length-1][0]+"]:</a><a id='higher_price'> NT$" + high_price + "</a><br></div>";
-                show_onsale_price +=  "<div id='onsale_box'>價差高達NT$" + (high_price - best_price).toFixed(0) + "!!<br></div>";
+                show_price += "<div id='higher_box'><div class='bad_circle'><div class='innimg' style='background-image:url(./png250px/"+ bad_area +".png)''></div></div><a id='higher_contry'>"+c_country[sortedPrice[sortedPrice.length-1][0]]+":</a><a id='higher_price'> NT$" + high_price + "</a><br></div>";
+                show_onsale_price +=  "<div id='onsale_box'>與最高價地區價差高達NT$" + (high_price - best_price).toFixed(0) + "!<br></div>";
               }
             }
               break;
@@ -263,19 +308,6 @@
       });
     }
 
-
-    //網頁開始執行
-    $(function ()  {
-      console.log('start');
-      eshop_game_query();
-      search_hide('#search');
-      
-      $('select[name="query_list"]').change(function(){
-            game_query();
-          });
-
-    });
-
     //排序
     function sortProperties(obj)
     {
@@ -293,23 +325,46 @@
       return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
     }
 
+    //網頁開始執行
+    $(function ()  {
+      winH = $(window).height();
+      console.log('start');
+      eshop_game_query();
+      search_hide('#search');
+      
+      $('select[name="query_list"]').change(function(){
+            game_query();
+          });
+      
+      $("body").append("<div id='guidebtn' style='z-index:5;right:24px;position:fixed;top:"+(winH/4)+"px;background-color:#FF0000;color:#FFFFFF;'>地區切換教學</div>");
 
-    // NEW selector  
-    jQuery.expr[':'].Contains = function(a, i, m){
-     return jQuery(a).text().toUpperCase()
-       .indexOf(m[3].toUpperCase()) >= 0;
-    };  
-     
-    // OVERWRITES old selecor
-    jQuery.expr[':'].contains = function(a, i, m){
-     return jQuery(a).text().toUpperCase()
-       .indexOf(m[3].toUpperCase()) >= 0;
-    };
+      $("#guidebtn").click(function () {
+                    $("body").css("overflow-y","hidden");
+                    $( "#dialog" ).dialog({
+                      hide: "blind",
+                      show : "blind",
+                      width: 1000,
+                      modal: true, // Freeze the background behind the overlay
+                      close: function( event, ui ) {
+                        $("body").css("overflow-y","scroll");
+                      },
+                      open: function( event, ui ) {
+                        $("body").css("overflow-y","hidden");
+                      }
+                    });                  
+                });
+      
+      $(window).scroll(function(){
+        //$('#dialog').css('top', $(document).scrollTop() + $(window).height() - $('.ui-dialog').height());
+      });
+      
+    });
+
     </script>
 
 
   </head>
-  <body> 
+  <body > 
 
   <div ></div>
   <div id='title'>
@@ -321,12 +376,18 @@
 
   <div id="query_select" >
 
-    <input id="search" type="search" placeholder="遊戲名稱">
+    <input id="search" type="search" placeholder="搜尋遊戲名稱">
     <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
     <div >匯率以<a href="https://eshop-prices.com/" target="_blank">台灣銀行牌告</a>為基準</div>
     <div>本網頁列舉價格僅供參考</div>
     <div id='game_count'></div>
     <div style="color:red">!請注意地區語言版本!</div>
+    
+
+    <div id="dialog" title="" style="display:none;width: 60%;text-align: center;">
+        <iframe src="./guide.html" style='width:100%;height:800px;'></iframe>
+    </div>
+
     
 
     <div class='container' id='show_table' style="height: 100%;">

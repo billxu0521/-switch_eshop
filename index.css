@@ -44,6 +44,7 @@
   }
 
   body {
+
     background: url("") no-repeat center center fixed;
     background-color: #FCFCFC;
     background-position:  center bottom;
@@ -148,6 +149,19 @@
   box-shadow:1px 1px 2px #000;
 }
 
+#guidebtn{
+  padding:8px;
+  margin-bottom:4px;
+  margin: auto;
+  text-align:center;
+  opacity:1.0;
+  border-radius:10px;
+  font-size: 20px;
+  text-shadow:1px 1px 6px #000;
+  box-shadow:1px 1px 2px #000;
+
+}
+
 #food_hp 
 {
   color: #CC0000 ;
@@ -186,7 +200,7 @@
 }
 
 #lower_contry{
-  color:#CE0000;
+  color:#3B3B3B;
   font-size: 20px;
 }
 
@@ -195,13 +209,26 @@
   font-size: 16px;
 }
 
+#lower_box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align: center;
+}
+
+#higher_box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align: center;
+}
+
 #lower_price{
   height: 20px;
   background-color:#FF0000;
   border-radius:10px;
-  text-align:center;
   color:#FFFFFF;
-  line-height:2;
+  line-height:1;
   font-size: 20px;
   text-shadow:1px 1px 6px #000;
   box-shadow:1px 1px 2px #000;
@@ -210,7 +237,6 @@
 
 #higher_price{
   height: 20px;
-  text-align:center;
   color:#ADADAD;
   font-size: 16px;
 }
@@ -240,6 +266,46 @@
   color:#7B7B7B;
   font-size: 14px;
   font-style:italic;
+}
+
+.best_circle {
+  left: 10%;
+  display: inline-block;
+  width: 20px;
+  height:20px;
+  border-radius: 50%;
+  border: 2px solid #eee;
+  padding: 2px;
+  background:#fff;
+}
+.bad_circle {
+  display: inline-block;
+  position:relative;
+  left: 0%;
+  width: 15px;
+  height:15px;
+  border-radius: 50%;
+  border: 2px solid #eee;
+  padding: 2px;
+  background:#fff;
+}
+
+.innimg{
+  background-size:cover;
+  background-position:center center;
+  height: 100%;
+  border-radius: 50%;
+}
+
+#dialog{
+  background:#fff;
+
+}
+
+.ui-widget-overlay {
+  opacity: 1;
+  filter: Alpha(Opacity=100);
+  background-color: #AAA;
 }
 
 /*讀取特效*/
