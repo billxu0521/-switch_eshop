@@ -217,7 +217,7 @@
 
           }
           
-          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toLowerCase()+"_" + game_name + "_"+game_cname+"'>"+ show_onsale_price + "<a id='c_name'>" + game_cname  + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
+          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + show_onsale_price + "<a id='c_name'>" + game_cname + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
           }
         $("#game_count").html('目前遊戲數量:'+game_count); 
         $(".container").html(html); 
@@ -313,7 +313,8 @@
     <div>本網頁列舉價格僅供參考</div>
     <div id='game_count'></div>
     <div style="color:red">!請注意地區語言版本!</div>
-
+    <div><a href="https://github.com/billxu0521/-switch_eshop" target="_blank">Github Link</a></div>
+    
     <div id="dialog" title="" style="display:none;width: 60%;text-align: center;">
         <iframe src="./guide.html" style='width:100%;height:800px;'></iframe>
     </div>
