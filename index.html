@@ -44,32 +44,7 @@
       gtag('config', 'UA-89833109-7');
     </script>
 
-
     <script>
-    
-
-    //測試讀取資料庫
-    function sheet_load_data(){
-      $.getJSON("https://spreadsheets.google.com/feeds/list/1Nj4CDgWbeIRbv-5SAfQyujYDcXKZFrOfR83MbZ181E0/1/public/values?alt=json-in-script&callback=?", function(json){  
-      var e = json.feed.entry,
-      l = e.length,
-      html = "",
-      entry, i, no, name_jp, name_ch;
-      console.log(l);
-      for (i = 0; i < l; i++) {
-        entry = e[i];
-        //console.log(entry.gsx$namejp.$t);
-
-        no = entry.gsx$no.$t;
-        name_jp = entry.gsx$namejp.$t;
-        name_ch = entry.gsx$namech.$t;
-        
-        //html += authority + " " + serial + " " + name + " " + sex + " " + register + "<br/>";
-        html += no + name_jp + name_ch + "<br/>";
-      }
-      $("#test").html(html);
-    });}
-
 
     //查詢公用函式
     function sql_query(sheetID,gid,sql = null){
@@ -126,6 +101,7 @@
       var sheetID = "1dt6FX7yA_g95dX1-5vQg-_GVpfcM3PPNNs645W1YrE4", // 試算表代號
       gid = "735367841", // 工作表代號
       sql = "SELECT A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI,AJ,AK,AL,AM,AN "; // SQL 語法
+      //各地區中文 用硬幹的
       var country = ['AT','AU', 'BE','BG','CA','CH','CY','CZ','DE','DK','EE','ES','FI','FR','GB','GR','HR','HU','IE','IT','JP','LT','LU' ,'LV' ,'MT','MX','NL' ,'NO','NZ', 'PL' ,'PT','RO','RU','SE','SI','SK' ,'US' ,'ZA'];
       var c_country = {
         'AT':'奧地利',
@@ -241,15 +217,10 @@
 
           }
           
-          //console.log(sortedCities);
-                //console.log(price);
           html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toLowerCase()+"_" + game_name + "_"+game_cname+"'>"+ show_onsale_price + "<a id='c_name'>" + game_cname  + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
-          
-          //html += "<br/>";
-        }
+          }
         $("#game_count").html('目前遊戲數量:'+game_count); 
         $(".container").html(html); 
-        
       }
 
     }
@@ -258,33 +229,6 @@
     function shuffle(arr){
       for(var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
       return arr;
-    }
-
-    //取匯率
-    function getUSDRate(){
-      var sheetID = "1dt6FX7yA_g95dX1-5vQg-_GVpfcM3PPNNs645W1YrE4", // 試算表代號
-      gid = "0", // 工作表代號
-      sql = "SELECT C WHERE A = 'USD'"; // SQL 語法
-      var res = sql_query (sheetID,gid,sql);
-
-      window[res] = function(json) {
-        var rowArray = json.table.rows,
-        rowLength = rowArray.length,
-        html = "",
-        i, j, rate;
-        var dataGroup = '';
-        for (i = 0; i < rowLength; i++) {
-          dataGroup = rowArray[i].c;
-          dataLength = dataGroup.length;
-          for (j = 0; j < dataLength; j++) {
-            if (!dataGroup[j]) {
-              continue;
-            }
-          }
-          rate = dataGroup[0].v;
-        }
-        
-      }
     }
 
     //篩選器
@@ -297,12 +241,6 @@
         }else{
           $(".game_box").hide();
           $("[name*='" +  $(selector).val() + "']").show();
-            //$("div").filter(function() {
-            //console.log(this);
-            //return _str.test($(this).attr('name'));
-          //}).show();
-
-          //$("[name*='1']").show();
         }
 
       });
@@ -311,18 +249,16 @@
     //排序
     function sortProperties(obj)
     {
-      // convert object into array
       var sortable=[];
       for(var key in obj)
         if(obj.hasOwnProperty(key))
-          sortable.push([key, obj[key]]); // each item is an array in format [key, value]
+          sortable.push([key, obj[key]]); 
       
-      // sort items by value
       sortable.sort(function(a, b)
       {
-        return a[1]-b[1]; // compare numbers
+        return a[1]-b[1]; 
       });
-      return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
+      return sortable; 
     }
 
     //網頁開始執行
@@ -355,7 +291,6 @@
                 });
       
       $(window).scroll(function(){
-        //$('#dialog').css('top', $(document).scrollTop() + $(window).height() - $('.ui-dialog').height());
       });
       
     });
@@ -371,33 +306,24 @@
   Switch E-Shop 地區比價網
   </div>
   
-  
-
-
   <div id="query_select" >
-
     <input id="search" type="search" placeholder="搜尋遊戲名稱">
     <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
     <div >匯率以<a href="https://eshop-prices.com/" target="_blank">台灣銀行牌告</a>為基準</div>
     <div>本網頁列舉價格僅供參考</div>
     <div id='game_count'></div>
     <div style="color:red">!請注意地區語言版本!</div>
-    
 
     <div id="dialog" title="" style="display:none;width: 60%;text-align: center;">
         <iframe src="./guide.html" style='width:100%;height:800px;'></iframe>
     </div>
 
-    
-
     <div class='container' id='show_table' style="height: 100%;">
         <div id='msg_1'>
           <div id='msg'></div>
         </div>
-          
         
-    </div>
-    
+    </div>  
 
   <hr>
   <footer>
