@@ -1,0 +1,282 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* Don't kill focus outline for keyboard users: http://24ways.org/2009/dont-lose-your-focus */
+a:hover, a:active {
+    outline: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Main CSS */
+body {
+  background-color: #F0F0F0;
+  font-size: 16px;
+  font-family:'Microsoft JhengHei';
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  min-height: 40vh;
+  display: block;
+  margin:0 auto;
+  margin-top: 1rem;
+  overflow:hidden;
+  text-align:center;
+  column-count: 1;
+  column-gap: 0;
+}
+
+footer{
+  line-height: 5;
+  color:#4F4F4F;
+}
+
+#title{
+  font-size: 1.25rem;
+  line-height: 2;
+  text-align:center;
+  color:#FFFFFF;
+  background-color:#ff4137;
+  margin-bottom: 1rem;;
+}
+
+.game_box{
+  display: inline-block;
+  border: #ff4137 solid 2px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 5px;
+  overflow:hidden;
+  width: 90%;
+  text-align:center;
+  z-index:0;
+}
+
+.game-box-title {
+  background-color:#ff4137;
+  color: #fff;
+  line-height: 1.5;
+  padding: .5rem;
+}
+
+#c_name{
+  font-size: 1.2rem;
+}
+
+#name{
+  font-size: .75rem;
+}
+
+.game-box-content {
+  padding: 1rem;
+}
+
+#lower_box, #higher_box {
+  border-radius: 5px;
+  line-height: 2;
+  padding: 5px;
+  text-align: left;
+}
+
+#lower_box::after, #higher_box::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+#lower_box{
+  background-color: rgb(63, 198, 223);
+}
+
+#higher_box{
+  margin-top: .5rem;
+  background-color: rgb(190, 190, 190);
+}
+
+#lower_price, #higher_price {
+  float: right;
+  background-color: #fff;
+  width: 6rem;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0 5px;
+  text-align: center;
+  max-width: 50%;
+}
+
+#lower_price{
+  color:  rgb(63, 198, 223);
+}
+
+#higher_price {
+  color:#ADADAD;
+}
+
+#lower_contry, #higher_contry {
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+#lower_contry{
+  color:#fff;
+}
+
+#higher_contry{
+  color:#fff;
+}
+
+.best_circle, .bad_circle {
+  background:#fff;
+  width: 1.5em;
+  height:1.5em;
+  border-radius: 50%;
+  display: inline-block;
+  padding: 2px;
+  vertical-align: middle;
+  margin: 0 .5em;
+}
+
+#guidebtn{
+  cursor: pointer;
+  padding:8px;
+  border-radius:10px 0 0 10px;
+  background-color: rgb(63, 198, 223);
+  position: fixed;
+  z-index: 5;
+  right: 0;
+  top: 200px;
+  color: #fff;
+  width: 1rem;
+  line-height: 1.25;
+}
+
+#search{
+  width: 90%;
+  margin:5px;
+  background: rgba(255,255,255,255.3);
+  color:#000000;
+  font-size:1.15rem;
+  text-align-last:center;
+  border-radius: 1rem;
+  border: none;
+  -webkit-appearance:none;
+  line-height: 1.75;
+  box-shadow: 0 0 1px 1px #888;
+}
+
+#query_select{
+  text-align:center;
+}
+
+.innimg{
+  background-size:cover;
+  background-position:center center;
+  height: 100%;
+  border-radius: 50%;
+}
+
+#dialog{
+  background:#fff;
+}
+
+@media only screen and (min-width: 1025px){ 
+  .container {
+    column-count: 3;
+  }
+
+  #search{
+    max-width: 400px;
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+  .container {
+    column-count: 2;
+  }
+
+  #search{
+    max-width: 400px;
+    font-size: 1rem;
+  }
+}
+
+.ui-widget-overlay {
+  opacity: 1;
+  filter: Alpha(Opacity=100);
+  background-color: #AAA;
+}
+
+#onsale_box{
+  display: none;
+}
+#pricetip{
+  display: none;
+}
+
+/*讀取特效*/
+#msg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

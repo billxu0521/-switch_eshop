@@ -15,7 +15,7 @@
     <meta property="og:image" content="http://3.bp.blogspot.com/-LhFyRujtVSI/WiQgtwNatkI/AAAAAAAAdIs/t9VaKZN3HJ4twuMuF00uakK1JJlwW8r3ACLcBGAs/s1600/NS%2BE-Shop.jpg">
 
     <title>Switch E-Shop 地區比價網</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="index-alternate.css">
     <link rel="alternate" hreflang="en-US" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="en-ES" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="ja" href="http://botwrecipe.gameqb.net/" />
@@ -204,20 +204,21 @@
             if(best_price == 0) {
               show_price = "    <div id='area_box'>---<br></div>";
             }else{        
-              show_price = "<div id='lower_box'><div class='best_circle'><div class='innimg' style='background-image:url(./png250px/"+ best_area +".png)''></div></div><a id='lower_contry'>"+c_country[sortedPrice[x][0]]+":</a><a id='lower_price'> NT$" + best_price + "</a><a id='pricetip'>此地區為最佳價格</a><br></div>";
+              show_price = "<div id='lower_box'><div class='best_circle'><div class='innimg' style='background-image:url(./png250px/"+ best_area +".png)''></div></div><a id='lower_contry'>"+c_country[sortedPrice[x][0]]+"</a><a id='lower_price'> NT$" + best_price + "</a><a id='pricetip'>此地區為最佳價格</a><br></div>";
               if(high_price > 0 && sortedPrice[x][0] != sortedPrice[sortedPrice.length-1][0]){
-                show_price += "<div id='higher_box'><div class='bad_circle'><div class='innimg' style='background-image:url(./png250px/"+ bad_area +".png)''></div></div><a id='higher_contry'>"+c_country[sortedPrice[sortedPrice.length-1][0]]+":</a><a id='higher_price'> NT$" + high_price + "</a><br></div>";
+                show_price += "<div id='higher_box'><div class='bad_circle'><div class='innimg' style='background-image:url(./png250px/"+ bad_area +".png)''></div></div><a id='higher_contry'>"+c_country[sortedPrice[sortedPrice.length-1][0]]+"</a><a id='higher_price'> NT$" + high_price + "</a><br></div>";
                 show_onsale_price +=  "<div id='onsale_box'>與最高價地區價差高達NT$" + (high_price - best_price).toFixed(0) + "!<br></div>";
               }
             }
+
+              show_price = "<div class='game-box-content'>" + show_price + "</div>";
               break;
             }else{
               show_price = "    <div id='area_box'>---<br></div>";
             }
-
           }
           
-          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + show_onsale_price + "<a id='c_name'>" + game_cname + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
+          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + show_onsale_price + "<div class='game-box-title'><a id='c_name'>" + game_cname + "</a><br><a id='name'>" + game_name + "</a></div>" +show_price +  "</div></div>";
           }
         $("#game_count").html('目前遊戲數量:'+game_count); 
         $(".container").html(html); 
@@ -272,7 +273,7 @@
             game_query();
           });
       
-      $("body").append("<div id='guidebtn' style='z-index:5;right:24px;position:fixed;top:"+(winH/4)+"px;background-color:#FF0000;color:#FFFFFF;'>地區切換教學</div>");
+      $("body").append("<div id='guidebtn'>地區切換教學</div>");
 
       $("#guidebtn").click(function () {
                     $("body").css("overflow-y","hidden");
@@ -324,9 +325,7 @@
           <div id='msg'></div>
         </div>
         
-    </div>  
-
-  <hr>
+    </div>
   <footer>
   <div id='footer'>Powered by: <a href="mailto:billxu0521@gmail.com">橫隔膜<a>@<a href="https://www.facebook.com/search/top/?q=%E5%90%B9%E8%91%97%E9%AD%94%E7%AC%9B%E7%9A%84%E6%B5%AE%E5%A3%AB%E5%BE%B7" target="_blank">Gameqb.net</a>
   </div>
