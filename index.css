@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
 
 @media only screen and (min-width: 769px){
   #search{
@@ -59,13 +59,23 @@
     font-family:'Microsoft JhengHei';
     /*min-width: 100%;
     min-height: 100%;*/
-}
+  }
+
+  #game_count{
+  background-color:#4f4f4f;
+  color: #FFFFFF;
+  max-width: 30%;
+  border-radius:10px;
+  font-size: 16px;
+  position:relative;
+  margin: auto;
+  }
 }
 @media only screen and (min-width: 0px) and (max-width: 769px){
   #search{
     width: 14em;
     margin:5px;
-    background: rgba(255,255,255,255.3);
+    background-color:#FFFFFF;
     color:#000000;
     text-shadow:0 1px 0 rgba(0,0,0,0.4);
     font-size:24px;
@@ -115,6 +125,16 @@
     /*min-width: 100%;
     min-height: 100%;*/
   }
+  #game_count{
+  background-color:#4f4f4f;
+  color: #FFFFFF;
+  max-width: 50%;
+  border-radius:10px;
+  font-size: 16px;
+  position:relative;
+  margin: auto;
+  }
+
 }
 
 .bannerimage {
@@ -142,31 +162,25 @@
   background-color:#FF0000;
   padding:8px;
   margin-bottom:4px;
-  opacity:1.0;
   border-radius:10px;
   text-align:center;
   color:#FFFFFF;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight:lighter;
 }
 
 #guidebtn{
   padding:8px;
   margin-bottom:4px;
   margin: auto;
-  height: 30px;
+  height: 120px;
   text-align:center;
   border-radius:10px;
-  font-size: 20px;
+  font-size: 14px;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
 }
-#game_count{
-  background-color:#4f4f4f;
-  color: #FFFFFF;
-  max-width: 20%;
-  border-radius:10px;
-  font-size: 16px;
-  position:relative;
-  margin: auto;
-}
+
 
 #main{
   text-align:center;

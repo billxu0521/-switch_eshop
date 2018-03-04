@@ -22,7 +22,7 @@
     <link rel="alternate" hreflang="zh-Hant" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="zh-Hans" href="http://botwrecipe.gameqb.net/" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
     <script type="text/javascript">
     </script>  
@@ -274,7 +274,7 @@
             game_query();
           });
       
-      $("body").append("<div id='guidebtn' style='z-index:5;right:0px;position:fixed;top:"+(winH/4)+"px;background-color:#66b3ff;color:#FFFFFF;'>地區切換教學</div>");
+      $("body").append("<div id='guidebtn' style='z-index:5;right:10px;position:fixed;top:"+(winH/4)+"px;background-color:#66b3ff;color:#FFFFFF;'><i class='fas fa-globe'></i>地區切換教學</div>");
 
       $("#guidebtn").click(function () {
                     $("body").css("overflow-y","hidden");
@@ -305,13 +305,16 @@
 
   <div ></div>
   
-  <div id='title'>
+  <div id='title'><i class="fab fa-nintendo-switch " style="font-size:24px"></i>
   Switch E-Shop 地區比價網
   </div>
-  <i class="fab fa-nintendo-switch"></i>
+  
+
   
   <div id="query_select" >
-    <input id="search" type="search" placeholder="搜尋遊戲名稱">
+    <div id="searchbox">
+    <input id="search" type="search" placeholder="搜尋遊戲名稱"><span class="icon"><i class="fa fa-search"></i></span>
+    </div>
     <div name='spreedsheet'>Spreedsheet here>>>  <a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a></div>
     <div >匯率以<a href="https://finance.google.com/finance?q=USDTWD" target="_blank">Google 國際匯率</a>為基準</div>
     <div>本網頁列舉價格僅供參考</div>
