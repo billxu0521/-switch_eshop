@@ -22,6 +22,7 @@
     <link rel="alternate" hreflang="zh-Hant" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="zh-Hans" href="http://botwrecipe.gameqb.net/" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script type="text/javascript">
     </script>  
@@ -43,15 +44,7 @@
 
       gtag('config', 'UA-89833109-7');
     </script>
-    <!-- test_001 -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-8465631962848847"
-         data-ad-slot="5019828325"
-         data-ad-format="auto"></ins>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+
     <script>
 
     //查詢公用函式
@@ -212,11 +205,12 @@
             if(best_price == 0) {
               show_price = "    <div id='area_box'>---<br></div>";
             }else{        
-              show_price = "<div id='lower_box'><div class='best_circle'><div class='innimg' style='background-image:url(./png250px/"+ best_area +".png)''></div></div><a id='lower_contry'>"+c_country[sortedPrice[x][0]]+":</a><a id='lower_price'> NT$" + best_price + "</a><a id='pricetip'>此地區為最佳價格</a><br></div>";
+              show_price = "<div id='box'><div id='lower_box'><a id='price_title'>最低價格</a><div id='box_hr' ></div><a id='lower_contry'>"+c_country[sortedPrice[x][0]]+"</a><a id='lower_price'> NT$" + best_price + "</a></div></div>";
               if(high_price > 0 && sortedPrice[x][0] != sortedPrice[sortedPrice.length-1][0]){
-                show_price += "<div id='higher_box'><div class='bad_circle'><div class='innimg' style='background-image:url(./png250px/"+ bad_area +".png)''></div></div><a id='higher_contry'>"+c_country[sortedPrice[sortedPrice.length-1][0]]+":</a><a id='higher_price'> NT$" + high_price + "</a><br></div>";
-                show_onsale_price +=  "<div id='onsale_box'>與最高價地區價差高達NT$" + (high_price - best_price).toFixed(0) + "!<br></div>";
+                show_price += "<div id='box'><div id='higher_box'><a id='price_title'>最高價格</a><div id='box_hr' ></div><a id='higher_contry'>"+c_country[sortedPrice[sortedPrice.length-1][0]]+"</a><a id='higher_price'> NT$" + high_price + "</a><br></div></div>";
+                show_onsale_price +=  "<div id='onsale_box'>與最高價地區價差高達<a id='pricetip'>NT$" + (high_price - best_price).toFixed(0) + "</a>!<br></div>";
               }
+
             }
               break;
             }else{
@@ -225,7 +219,7 @@
 
           }
           
-          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + show_onsale_price + "<a id='c_name'>" + game_cname + "</a><br><a id='name'>" + game_name + "</a><br>" +show_price +  "</div></div>";
+          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + "<div id='pricebox'><div id='showname'><a id='c_name'>" + game_cname + "</a><br><a id='name'>" + game_name + "</a></div>" + show_onsale_price +show_price +  "</div></div></div>";
           }
         $("#game_count").html('目前遊戲數量:'+game_count); 
         $(".container").html(html); 
@@ -280,7 +274,7 @@
             game_query();
           });
       
-      $("body").append("<div id='guidebtn' style='z-index:5;right:24px;position:fixed;top:"+(winH/4)+"px;background-color:#FF0000;color:#FFFFFF;'>地區切換教學</div>");
+      $("body").append("<div id='guidebtn' style='z-index:5;right:0px;position:fixed;top:"+(winH/4)+"px;background-color:#66b3ff;color:#FFFFFF;'>地區切換教學</div>");
 
       $("#guidebtn").click(function () {
                     $("body").css("overflow-y","hidden");
@@ -310,9 +304,11 @@
   <body > 
 
   <div ></div>
+  
   <div id='title'>
   Switch E-Shop 地區比價網
   </div>
+  <i class="fab fa-nintendo-switch"></i>
   
   <div id="query_select" >
     <input id="search" type="search" placeholder="搜尋遊戲名稱">
