@@ -357,8 +357,21 @@
 
 #dialog{
   background:#fff;
-
 }
+
+.btn{
+  color :#FFFFFF;
+  background-color:#66b3ff;
+  padding:4px;
+  margin:4px;
+  border-radius:8px;
+  text-align:center;
+  font-size: 14px;
+ }
+
+ #menubtn{
+  margin:10px;
+ }
 
 .ui-widget-overlay {
   opacity: 1;
