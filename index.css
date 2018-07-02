@@ -247,12 +247,6 @@
   padding:6px;
 }
 
-#price_title{
-  font-weight:lighter;
-  margin-left:auto;
-  margin-right:auto;
-  font-size: 18px;  
-}
 
  #box_hr{
   width:2px;
@@ -367,10 +361,17 @@
   border-radius:8px;
   text-align:center;
   font-size: 14px;
+  text-decoration:none;
  }
 
  #menubtn{
   margin:10px;
+ }
+
+ #query_select{
+  color :#444444;
+  font-weight:bold;
+  font-size: 16px;
  }
 
 .ui-widget-overlay {
@@ -378,6 +379,21 @@
   filter: Alpha(Opacity=100);
   background-color: #AAA;
 }
+
+.price{
+  width:80px;
+  border-radius: 5px; 
+  font-size:16px;
+  display: inline-block;
+  -webkit-appearance:none;
+  outline:none;
+}
+
+#price_title{
+  margin-left:auto;
+  margin-right:auto;
+}
+
 
 /*讀取特效*/
 #msg {
@@ -409,7 +425,7 @@ footer{
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50px;
+  height: 80px;
   width: 100%;
   border-top: 1px solid white;
   justify-content:center;
