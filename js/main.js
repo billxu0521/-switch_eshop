@@ -146,6 +146,7 @@
             var high_price = sortedPrice[sortedPrice.length-1][1].toFixed(0);
             if(sortedPrice[x][1].toFixed(1) > 0){
               //console.log(game_name+"//"+sortedPrice[x][1]);
+            
             best_price = sortedPrice[x][1].toFixed(0); 
             var best_area =  sortedPrice[x][0].toLowerCase();
             var bad_area = sortedPrice[sortedPrice.length-1][0].toLowerCase();
@@ -163,6 +164,7 @@
               show_price = "    <div id='area_box'>---<br></div>";
             }
           }
+          game_name = game_name.replace(/'/g,"");
           html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + "<div id='pricebox'><div id='showname'><a id='c_name'>" + game_cname + "</a><br><a href='https://www.google.com.tw/search?q="+ game_name +" switch' target='_blank' id='name'>" + game_name + "</a></div>" + show_onsale_price +show_price +  "</div></div></div>";
           }
         $("#game_count").html('目前遊戲數量:'+game_count); 
