@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 @import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
 
+.navbar{
+  background: rgba(255,255,255,.9) !important;
+  padding-bottom: 1rem !important;
+}
+
+header{
+  padding-top: 80px !important;
+}
 @media only screen and (min-width: 769px){
   #search{
     width: 220px;
@@ -160,13 +168,14 @@
 
 #title{
   background-color:#FF0000;
-  padding:8px;
-  margin-bottom:4px;
+  padding:6px;
+  margin:auto;
   border-radius:10px;
   text-align:center;
   color:#FFFFFF;
   font-size: 24px;
   font-weight:lighter;
+  width: 95%;
 }
 
 #guidebtn{
@@ -181,6 +190,17 @@
   writing-mode: vertical-rl;
 }
 
+#backtop{
+  padding:8px;
+  margin-bottom:4px;
+  margin: auto;
+  height: 100px;
+  text-align:center;
+  border-radius:10px;
+  font-size: 14px;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+}
 
 #main{
   text-align:center;
@@ -416,6 +436,7 @@
     100% { transform: rotate(360deg); }
 }
 
+
 footer{
   display:flex;
   box-sizing: border-box;
@@ -430,5 +451,7 @@ footer{
   border-top: 1px solid white;
   justify-content:center;
   align-items:center; 
+  text-align:center;
+  font-weight: bold;
 }
 
