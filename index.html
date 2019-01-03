@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
   <head>
+    <meta name="author" content="billxu0521">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:type" content="game">
@@ -13,9 +15,18 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image" content="http://3.bp.blogspot.com/-LhFyRujtVSI/WiQgtwNatkI/AAAAAAAAdIs/t9VaKZN3HJ4twuMuF00uakK1JJlwW8r3ACLcBGAs/s1600/NS%2BE-Shop.jpg">
-
     <title>Switch E-Shop 地區比價網</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/one-page-wonder.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="alternate" hreflang="en-US" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="en-ES" href="http://botwrecipe.gameqb.net/" />
     <link rel="alternate" hreflang="ja" href="http://botwrecipe.gameqb.net/" />
@@ -29,13 +40,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="vendor/main.js"></script>
     <script language="javascript">
     </script> 
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
-    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4.2.0/dist/masonry.pkgd.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>    
+    <script src="https://unpkg.com/masonry-layout@4.2.0/dist/masonry.pkgd.min.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89833109-7"></script>
@@ -46,8 +58,6 @@
 
       gtag('config', 'UA-89833109-7');
     </script>
-
-
 
     <script>
     //網頁開始執行
@@ -64,13 +74,43 @@
 
       $("body").append("<div id='guidebtn' style='z-index:5;right:10px;position:fixed;top:"+(winH/4)+"px;background-color:#66b3ff;color:#FFFFFF;'><i class='fas fa-globe'></i>地區切換教學</div>");
 
+      $("body").append("<div id='backtop' style='z-index:5;right:10px;position:fixed;top:"+(winH/2)+"px;background-color:#66b3ff;color:#FFFFFF;'>回到頂端</div>");
+
+      locatioin = 1/2, // 按鈕出現在螢幕的高度
+      right = 10, // 距離右邊 px 值
+      opacity = 0.6, // 透明度
+      speed = 500, // 捲動速度
+      $button = $("#backtop"),
+      $body = $(document),
+      $win = $(window);
+      $button.on({
+        mouseover: function() {$button.css("opacity", 1);},
+        mouseout: function() {$button.css("opacity", opacity);},
+        click: function() {$("html, body").animate({scrollTop: 0}, speed);}
+      });
+      window.goTopMove = function () {
+        var scrollH = $body.scrollTop(),
+        winH = $win.height(),
+        css = {"top": winH * locatioin + "px", "position": "fixed", "right": right, "opacity": opacity};
+        if(scrollH > 20) {
+          $button.css(css);
+          $button.fadeIn("slow");
+        } else {
+          $button.fadeOut("slow");
+        }
+      };
+      $win.on({
+        scroll: function() {goTopMove();},
+        resize: function() {goTopMove();}
+      });
 
       $("#guidebtn").click(function () {
                     $("body").css("overflow-y","hidden");
-                    $( "#guide_page" ).dialog({
+                    $("#guide_page").dialog({
                       hide: "blind",
                       show : "blind",
-                      width: 1000,
+                      width: 800,
+                      height: 600,
                       modal: true, // Freeze the background behind the overlay
                       close: function( event, ui ) {
                         $("body").css("overflow-y","scroll");
@@ -120,58 +160,68 @@
     </script>
 
   </head>
-  <body > 
 
-  <div ></div>
-  
-  <div id='title'><i class="fab fa-nintendo-switch " style="font-size:24px"></i>
-  Switch E-Shop 地區比價網
-  </div>
-  
+  <body>
 
-  
-  <div id="query_select" >
-    <div id="searchbox">
-    <div id="menubtn">
-    <a href="http://www.nintendo.tw/hardware/switch/specs/#1" target="_blank" id="specbtn" class='btn'>主機規格情報</a>
-    <a href="https://forum.gamer.com.tw/C.php?bsn=31587&snA=454" target="_blank" id="sinupbtn" class='btn'>eshop註冊教學</a>
-    <a href="https://forum.gamer.com.tw/A.php?bsn=31587" target="_blank" id="specbtn" class='btn'>巴哈討論區</a>
-    </div>
-    <input id="search" type="search" placeholder="搜尋遊戲名稱"><span class="icon"><i class="fa fa-search"></i></span>
-    <div id="price_title">最低<i class="fas fa-dollar-sign"></i><input id="min_price" class="price" type="search" placeholder="0" value="0">～<i class="fas fa-dollar-sign"></i><input id="max_price" class="price" type="search" placeholder="10000" value="10000">最高</div>
-    </div>
-    <div >匯率以<a href="https://finance.google.com/finance?q=USDTWD" target="_blank">Google 國際匯率</a>為基準</div>
-    <div>本網頁列舉價格(新台幣$NTD)僅供參考</div>
-    <div id='game_count'></div>
-    <div style="color:red">!請注意地區語言版本!</div>
-    
-    <div id="guide_page" class="dialog" title="" style="display:none;width: 60%;text-align: center;">
-        <iframe src="./guide.html" style='width:100%;height:800px;'></iframe>
-    </div>
-    <div id="spec_page" class="dialog" title="" style="display:none;width: 60%;text-align: center;">
-        <iframe src="./spec.html" style='width:100%;height:800px;'></iframe>
-    </div>
-    <div id="singup_page" class="dialog" title="" style="display:none;width: 60%;text-align: center;">
-        <iframe src="./singup.html" style='width:100%;height:800px;'></iframe>
-    </div>
+    <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top"><div id='title'><i class="fab fa-nintendo-switch " style="font-size:24px"></i>
+        Switch E-Shop 地區比價網</div>
+        </nav>
 
+    <header >
+      <div >
+        <div id="query_select" >
+          <div id="searchbox">
+          <div id="menubtn">
+          <a href="http://www.nintendo.tw/hardware/switch/specs/#1" target="_blank" id="specbtn" class='btn'>主機規格情報</a>
+          <a href="https://forum.gamer.com.tw/C.php?bsn=31587&snA=454" target="_blank" id="sinupbtn" class='btn'>eshop註冊教學</a>
+          <a href="https://forum.gamer.com.tw/A.php?bsn=31587" target="_blank" id="specbtn" class='btn'>巴哈討論區</a>
+          </div>
+          <input id="search" type="search" placeholder="搜尋遊戲名稱"><span class="icon"><i class="fa fa-search"></i></span>
+          <div id="price_title">最低<i class="fas fa-dollar-sign"></i><input id="min_price" class="price" type="search" placeholder="0" value="0">～<i class="fas fa-dollar-sign"></i><input id="max_price" class="price" type="search" placeholder="10000" value="10000">最高</div>
+          </div>
+          <div >匯率以<a href="https://finance.google.com/finance?q=USDTWD" target="_blank">Google 國際匯率</a>為基準</div>
+          <div>本網頁列舉價格(新台幣$NTD)僅供參考</div>
+          <div id='game_count'></div>
+          <div style="color:red">!請注意地區語言版本!</div>    
+          
+          <div id="guide_page" class="dialog" title="" style="display:none;width: 60%;text-align: center;">
+              <iframe src="./guide.html" style='width:100%;height:800px;'></iframe>
+          </div>
+          <div id="spec_page" class="dialog" title="" style="display:none;width: 60%;text-align: center;">
+              <iframe src="./spec.html" style='width:100%;height:800px;'></iframe>
+          </div>
+          <div id="singup_page" class="dialog" title="" style="display:none;width: 60%;text-align: center;">
+              <iframe src="./singup.html" style='width:100%;height:800px;'></iframe>
+          </div>
+      </div>
+        
+    </header>
 
-
-    <div class='container' id='show_table' style="height: 100%;">
+    <section>
+      <div class="container" id='show_table' style="height: 100%;">
         <div id='msg_1'>
           <div id='msg'></div>
         </div>
         
-    </div>  
+      </div>
+    </section>
 
-  <hr>
-  <footer>
+    <hr>
+    <!-- Footer -->
+    <footer>
 
-  <div id='footer'>
-    本網頁內所記載之公司名稱、產品名稱、系統名稱以及各公司之註冊商標，以及所引用之圖片、資料之相關財產權皆歸屬於各原始公司、各原始情報網站。本網頁內所有文章歡迎自由連結，若欲轉載全文至其他網站，煩請發信告知，並切勿更改文章內容。本網頁參考之價格資料，來源皆為「<a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a>」
-    <div><a href="https://github.com/billxu0521/-switch_eshop" target="_blank">Github Link</a></div>
-    Powered by: <a href="mailto:billxu0521@gmail.com">橫隔膜<a>@<a href="https://www.facebook.com/search/top/?q=%E5%90%B9%E8%91%97%E9%AD%94%E7%AC%9B%E7%9A%84%E6%B5%AE%E5%A3%AB%E5%BE%B7" target="_blank">Gameqb.net</a> 
-  </div>
-                                    
+      <div id='footer'>
+        本網頁內所記載之公司名稱、產品名稱、系統名稱以及各公司之註冊商標，以及所引用之圖片、資料之相關財產權皆歸屬於各原始公司、各原始情報網站。本網頁內所有文章歡迎自由連結，若欲轉載全文至其他網站，煩請發信告知，並切勿更改文章內容。本網頁參考之價格資料，來源皆為「<a href="https://eshop-prices.com/" target="_blank">https://eshop-prices.com/</a>」
+        <div><a href="https://github.com/billxu0521/-switch_eshop" target="_blank">Github Link</a><br>
+        Powered by: <a href="mailto:billxu0521@gmail.com">橫隔膜<a>@<a href="https://www.facebook.com/search/top/?q=%E5%90%B9%E8%91%97%E9%AD%94%E7%AC%9B%E7%9A%84%E6%B5%AE%E5%A3%AB%E5%BE%B7" target="_blank">Gameqb.net</a> 
+      </div>
+    </footer>
+    
+
   </body>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </html>
