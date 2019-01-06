@@ -181,11 +181,11 @@ header{
 #guidebtn{
   padding:8px;
   margin-bottom:4px;
-  margin: auto;
-  height: 120px;
+  height: 140px;
+  width: 50px;
   text-align:center;
   border-radius:10px;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-writing-mode: vertical-rl;
   writing-mode: vertical-rl;
 }
@@ -194,10 +194,11 @@ header{
   padding:8px;
   margin-bottom:4px;
   margin: auto;
-  height: 100px;
+  height: 140px;
+  width: 50px;
   text-align:center;
   border-radius:10px;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-writing-mode: vertical-rl;
   writing-mode: vertical-rl;
 }

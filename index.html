@@ -8,7 +8,7 @@
     <meta property="og:type" content="game">
     <meta property="og:site_name" content="Nintendo e-shop Database">
     <meta property="og:url" content="http://eshoplist.gameqb.net">
-    <meta name="KeyWords" content="nintendo,任天堂,e-shop,switch,nintendo switch,Switch,nintendo eshop"/>
+    <meta name="KeyWords" content="nintendo,任天堂,e-shop,switch,nintendo switch,Switch,nintendo eshop Nintendo Switch E-Shop eShop eshop ESHOP 比價網 Price 比價 商城 商店 數位商城 數位商店 數位版 最低價 區域 價格 比較 價格比較"/>
     <meta name="Description" content=""/>
     <meta property="og:description" content="Nintendo e-shop 快速檢索各地的遊戲價格"/> 
     <meta property="og:title" content="Nintendo e-shop 比價網"/> 
@@ -72,9 +72,9 @@
             game_query();
           });
 
-      $("body").append("<div id='guidebtn' style='z-index:5;right:10px;position:fixed;top:"+(winH/4)+"px;background-color:#66b3ff;color:#FFFFFF;'><i class='fas fa-globe'></i>地區切換教學</div>");
+      $("body").append("<div id='guidebtn' style='z-index:5;right:10px;position:fixed;top:"+(winH/4)+"px;background-color:#66b3ff;color:#FFFFFF;cursor: pointer;'><i class='fas fa-globe'></i>地區切換教學</div>");
 
-      $("body").append("<div id='backtop' style='z-index:5;right:10px;position:fixed;top:"+(winH/2)+"px;background-color:#66b3ff;color:#FFFFFF;'>回到頂端</div>");
+      $("body").append("<div id='backtop' style='z-index:5;right:10px;position:fixed;top:"+(winH/2)+"px;background-color:#66b3ff;color:#FFFFFF;cursor: pointer; '>回到頂端</div>");
 
       locatioin = 1/2, // 按鈕出現在螢幕的高度
       right = 10, // 距離右邊 px 值
@@ -111,37 +111,6 @@
                       show : "blind",
                       width: 800,
                       height: 600,
-                      modal: true, // Freeze the background behind the overlay
-                      close: function( event, ui ) {
-                        $("body").css("overflow-y","scroll");
-                      },
-                      open: function( event, ui ) {
-                        $("body").css("overflow-y","hidden");
-                      }
-                    });                  
-                });
-      $("#specbtn").click(function () {
-                    $("body").css("overflow-y","hidden");
-                    $( "#spec_page" ).dialog({
-                      hide: "blind",
-                      show : "blind",
-                      width: 1000,
-                      modal: true, // Freeze the background behind the overlay
-                      close: function( event, ui ) {
-                        $("body").css("overflow-y","scroll");
-                      },
-                      open: function( event, ui ) {
-                        $("body").css("overflow-y","hidden");
-                      }
-                    });                  
-                });
-
-      $("#sinupbtn").click(function () {
-                    $("body").css("overflow-y","hidden");
-                    $( "#singup_page" ).dialog({
-                      hide: "blind",
-                      show : "blind",
-                      width: 1000,
                       modal: true, // Freeze the background behind the overlay
                       close: function( event, ui ) {
                         $("body").css("overflow-y","scroll");
