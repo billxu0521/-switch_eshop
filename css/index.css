@@ -28,7 +28,7 @@
     max-width: 90%;
     display: block;
     padding: 10px;
-    margin:0 auto;
+    margin: auto;
     overflow:hidden;
     width:80%;
     column-count: 3;
@@ -71,13 +71,38 @@
   }
 
   #game_count{
-  background-color:#4f4f4f;
-  color: #FFFFFF;
-  max-width: 30%;
-  border-radius:10px;
-  font-size: 16px;
-  position:relative;
-  margin: auto;
+    background-color:#4f4f4f;
+    color: #FFFFFF;
+    max-width: 30%;
+    border-radius:10px;
+    font-size: 16px;
+    position:relative;
+    margin: auto;
+  }
+
+  #guidebtn{
+    padding:8px;
+    margin-bottom:4px;
+    height: 140px;
+    width: 50px;
+    text-align:center;
+    border-radius:10px;
+    font-size: 16px;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+  }
+
+#backtop{
+    padding:8px;
+    margin-bottom:4px;
+    margin: auto;
+    height: 140px;
+    width: 50px;
+    text-align:center;
+    border-radius:10px;
+    font-size: 16px;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
   }
 }
 @media only screen and (min-width: 0px) and (max-width: 769px){
@@ -101,7 +126,7 @@
     max-width: 90%;
     display: block;
     padding: 10px;
-    margin: 5px 5px 5px 0;
+    margin: auto;
     overflow:hidden;
     width:90%;
     column-count: 1;
@@ -139,15 +164,40 @@
     min-height: 100%;*/
   }
   #game_count{
-  background-color:#4f4f4f;
-  color: #FFFFFF;
-  max-width: 50%;
-  border-radius:10px;
-  font-size: 16px;
-  position:relative;
-  margin: auto;
+    background-color:#4f4f4f;
+    color: #FFFFFF;
+    max-width: 50%;
+    border-radius:10px;
+    font-size: 16px;
+    position:relative;
+    margin: auto;
   }
 
+
+  #guidebtn{
+    padding:8px;
+    margin-bottom:4px;
+    height: 100px;
+    width: 30px;
+    text-align:center;
+    border-radius:10px;
+    font-size: 14px;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+  }
+
+#backtop{
+    padding:8px;
+    margin-bottom:4px;
+    margin: auto;
+    height: 100px;
+    width: 30px;
+    text-align:center;
+    border-radius:10px;
+    font-size: 14px;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+  }
 }
 
 .bannerimage {
@@ -181,31 +231,6 @@
   font-size: 24px;
   font-weight:lighter;
   width: 95%;
-}
-
-#guidebtn{
-  padding:8px;
-  margin-bottom:4px;
-  height: 140px;
-  width: 50px;
-  text-align:center;
-  border-radius:10px;
-  font-size: 16px;
-  -webkit-writing-mode: vertical-rl;
-  writing-mode: vertical-rl;
-}
-
-#backtop{
-  padding:8px;
-  margin-bottom:4px;
-  margin: auto;
-  height: 140px;
-  width: 50px;
-  text-align:center;
-  border-radius:10px;
-  font-size: 16px;
-  -webkit-writing-mode: vertical-rl;
-  writing-mode: vertical-rl;
 }
 
 #main{
