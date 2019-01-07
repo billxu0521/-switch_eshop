@@ -6,10 +6,11 @@
   padding-bottom: 1rem !important;
 }
 
-header{
-  padding-top: 80px !important;
-}
 @media only screen and (min-width: 769px){
+  header{
+    padding-top: 80px !important;
+  }
+
   #search{
     width: 220px;
     margin:5px;
@@ -80,6 +81,10 @@ header{
   }
 }
 @media only screen and (min-width: 0px) and (max-width: 769px){
+  header{
+    padding-top: 120px !important;
+  }
+
   #search{
     width: 14em;
     margin:5px;
