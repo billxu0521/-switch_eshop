@@ -369,6 +369,7 @@
   color:#FFFFFF;
   font-size: 12px;
   font-weight:lighter;
+  text-decoration:underline;
 }
 
 .best_circle {
@@ -398,6 +399,10 @@
   background-position:center center;
   height: 100%;
   border-radius: 50%;
+}
+#fagamesearch{
+  color:#fff;
+  padding-right: 2px;
 }
 
 #dialog{
