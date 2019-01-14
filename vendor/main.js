@@ -165,7 +165,7 @@
             }
           }
           game_name = game_name.replace(/'/g,"");
-          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + "<div id='pricebox'><div id='showname'><a id='c_name'>" + game_cname + "</a><br><div id='searchtooltip' title='點擊' ><i id='fagamesearch' class='fa fa-search'></i><a href='https://www.google.com.tw/search?q="+ game_name +" switch' target='_blank' id='name'>" + game_name + "</a></div></div>" + show_onsale_price +show_price +  "</div></div></div>";
+          html += "<div style='position:relative;'><div class='game_box' name='"+ game_name.toUpperCase() + game_name.toLowerCase() + "_" + game_name + "_"+ game_cname + "'>" + "<div id='pricebox'><div id='showname'><a id='c_name'>" + game_cname + "</a><br><div id='searchtooltip' title='點擊查詢遊戲' ><i id='fagamesearch' class='fa fa-search'></i><a href='https://www.google.com.tw/search?q="+ game_name +" switch' target='_blank' id='name'>" + game_name + "</a></div></div>" + show_onsale_price +show_price +  "</div></div></div>";
           }
         $("#game_count").html('目前遊戲數量:'+game_count); 
         $(".container").html(html); 
