@@ -1,3 +1,5 @@
+ALLDATALIST = [];
+
  //查詢公用函式
     function sql_query(sheetID,gid,sql = null){
       var sheetID = sheetID; // 試算表代號
@@ -45,6 +47,44 @@
           //html += "<br/>";
         }
       }
+    }
+
+    function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+    }
+
+    
+
+    //新版從檔案讀取全部資料
+    function getAlldata(){
+      getGameNameList();
+      
+    }
+
+    function getGameNameList(){
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://eshoplist.gameqb.net/gamedata/eshop.db', true);
+      xhr.responseType = 'arraybuffer';
+
+      xhr.onload = function(e) {
+        var uInt8Array = new Uint8Array(this.response);
+        var db = new SQL.Database(uInt8Array);
+        var contents = db.exec("SELECT * FROM game_list");
+        console.log(contents)
+        // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
+      };
+      xhr.send();
+
+  
+
     }
 
     //讀取全部資料
