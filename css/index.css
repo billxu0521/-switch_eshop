@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 @import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
 
+.ins{
+  text-align:center
+}
 .navbar{
   background: rgba(255,255,255,.9) !important;
   padding-bottom: 1rem !important;
