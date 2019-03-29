@@ -116,6 +116,7 @@
   }
 
   #Ad_container{
+    display: hidden;
     text-align:center;
     max-height: 60px;
   }
