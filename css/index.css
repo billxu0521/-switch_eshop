@@ -16,6 +16,13 @@
     text-align:center;
     height: 100px;
   }
+
+  #Ad_container_m{
+    display: none;
+    text-align:center;
+    max-height: 60px;
+  }
+
   #search{
     width: 220px;
     margin:5px;
@@ -116,6 +123,12 @@
   }
 
   #Ad_container{
+    display: none;
+    text-align:center;
+    max-height: 60px;
+  }
+
+  #Ad_container_m{
     display: none;
     text-align:center;
     max-height: 60px;
